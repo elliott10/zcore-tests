@@ -31,3 +31,13 @@ optional arguments:
   -f, --fast            do not test known failed and timeout testcases
   -t TEST, --test TEST  run only one test
 ```
+
+## d1 libc test
+
+```
+# usage:
+python linux_libc_test-board.py -a riscv64 -f -b d1 -D /dev/ttyUSB0
+  # 运行所在testcases/linux_libc_test/riscv64_d1.txt里状态为OK的测例
+python linux_libc_test-board.py -a riscv64 -t <testcase>
+  # 运行单个测例<testcase>
+```
