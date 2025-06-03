@@ -67,7 +67,7 @@ void serial_test(char* serial_dev){
     gettimeofday(&time_start, NULL);
     for(int i=0; i<iter; i++){
         write(serial_fd, buf + i, 1);
-        // printf("write: %c\n", buf[i]);
+        //printf("Write to Uart: %c\n", buf[i]);
         
         do {
             read(serial_fd, buf_tmp, 1);
@@ -129,8 +129,8 @@ void print_result(void){
     sum = (time_end.tv_sec - time_start.tv_sec) * 1000000;
     // printf("total sec : %f\n", sum);
     sum += (time_end.tv_usec - time_start.tv_usec);
-    // printf("total usec : %f\n", sum);
-    printf("avg time(us) : %f\n", sum/2/(iter + loops)); 
+    printf("total usec : %f\n", sum);
+    printf("avg time(us) : %f\n", (sum/2)/iter );
 }
 
 void usage(void){
@@ -151,7 +151,8 @@ int isoption(char* option, char* test){
 int main(int argc, char* argv[]){
     if(argc == 3 && isoption(argv[1], "-net")) net_test(argv[2]);
     else if(argc == 3 && isoption(argv[1], "-serial")) serial_test(argv[2]);
-    if(argc == 4 && isoption(argv[1], "-pingpong")) pingpong_test(argv+2);
+    else if(argc == 4 && isoption(argv[1], "-pingpong")) pingpong_test(argv+2);
     else usage();
+
     print_result();
 }

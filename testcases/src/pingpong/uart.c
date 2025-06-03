@@ -32,9 +32,11 @@ int main(int argc, char* argv[]){
         while(strlen(buf_rcv) < 1){
             read(fd, buf_rcv, 1);
         }
-        if(buf_rcv[0] == '\1') break;
+	// Ctrl+D
+        if(buf_rcv[0] == '\4') break;
+
         write(fd, buf_rcv, 1);
-        // printf("write : %s\n", buf_rcv);
+        //printf("Uart get and write : %s\n", buf_rcv);
     }
     close(fd);
 }
